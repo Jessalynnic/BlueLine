@@ -1,14 +1,15 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './pages/login';
+import Dashboard from './pages/dashboard';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-          Learn React
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 }
 
