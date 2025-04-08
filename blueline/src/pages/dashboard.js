@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import logo from '../images/blueline_text_logo.png';
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -9,15 +10,35 @@ function Dashboard() {
 
     return (
       <div>
-        <h1>Dashboard</h1>
-
-        <button
-          type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
-          onClick={handleClick}
+        <div 
+          className="flex px-2 py-4 justify-between"
+          style={{ backgroundColor: '#a0b3ca' }}
         >
-          Back to Login
-        </button>
+          <img src={logo} alt="BlueLine Text Logo" className="w-40 h-auto" />
+
+          <div className="flex w-62 gap-2">
+            <button
+                type="submit"
+                className="w-32 self-center text-sm text-white py-2 rounded-lg"
+                style={{ backgroundColor: '#224168' }}
+              >
+                User: Oterjn
+            </button>
+
+            <button
+                type="submit"
+                className="w-32 self-center text-sm text-white py-2 rounded-lg"
+                style={{ backgroundColor: '#224168' }}
+                onClick={handleClick}
+              >
+                Logout
+            </button>
+          </div>
+        </div>
+        <div className="flex h-20 px-6">
+          <h1 className='text-2xl font-bold self-center'>NYPD Dashboard</h1>
+        </div>
+
       </div>
     );
   }
