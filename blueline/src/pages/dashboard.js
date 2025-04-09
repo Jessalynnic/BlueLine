@@ -36,7 +36,7 @@ function Dashboard() {
           </div>
         </div>
         <div className="flex h-20 px-6">
-          <h1 className='text-2xl font-bold self-center'>NYPD Dashboard</h1>
+          <h1 className='text-2xl font-bold self-center'>Dashboard Overview</h1>
         </div>
 
       </div>
