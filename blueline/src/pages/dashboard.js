@@ -4,6 +4,7 @@ import logo from '../images/blueline_text_logo.png';
 import Sidebar from './components/sideBar';
 import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import badgeIcon from '../images/badge.png';
+import CriminalDB from './criminalDB';
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -19,12 +20,13 @@ function Dashboard() {
 
     return (
       <div className="flex flex-row">
+        {/* Left Column: Blueline Sidebar */}
         <div 
           className="flex flex-col h-screen px-2 py-4 justify-between"
           style={{ backgroundColor: '#a0b3ca' }}
         >
           <img src={logo} alt="BlueLine Text Logo" className="w-40 h-auto" />
-
+          
           <Sidebar headerText={headerText} sideBarClick={sideBarClick} />
 
           <div className="flex border-2 flex-col h-24 py-2 gap-3">
@@ -33,7 +35,7 @@ function Dashboard() {
               onClick={handleClick}
             >
               <ArrowLeftStartOnRectangleIcon className="w-5 h-5" />
-              <span className="text-sm">Log Out</span>
+              <span className="text-lg">Log Out</span>
             </div>
             <div className="flex flex-row px-2 items-center">
               <img src={badgeIcon} alt="Badge Icon" className="w-7 h-7"/>
@@ -44,10 +46,14 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="flex h-20 px-6">
-          <h1 className='text-2xl font-bold self-center'>{headerText}</h1>
-        </div>
+        {/* Right Column: Information Section */}
+        <div className="flex-1 flex flex-col border-2 h-screen px-6 pt-7">
+          <h1 className='text-2xl mb-4 font-bold'>{headerText}</h1>
 
+          <div className="flex-1 flex flex-col h-2/3 border-2">
+            {headerText === "Criminal Database" && <CriminalDB />}
+          </div>
+        </div>
       </div>
     );
   }
