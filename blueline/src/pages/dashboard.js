@@ -1,14 +1,21 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../images/blueline_text_logo.png';
-import { ArrowLeftStartOnRectangleIcon, CircleStackIcon, ClipboardDocumentListIcon, FingerPrintIcon } from '@heroicons/react/24/outline';
+import Sidebar from './components/sideBar';
+import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import badgeIcon from '../images/badge.png';
 
 function Dashboard() {
     const navigate = useNavigate();
+    const [headerText, setHeaderText] = useState("Dashboard Overview");
 
     const handleClick = () => {
         navigate('/');  // Navigate to the login page
     };
+
+    const sideBarClick = (text) => {
+      setHeaderText(text);
+    }
 
     return (
       <div className="flex flex-row">
@@ -18,36 +25,7 @@ function Dashboard() {
         >
           <img src={logo} alt="BlueLine Text Logo" className="w-40 h-auto" />
 
-          <div className="flex flex-col border-2 gap-3">
-            <div 
-              className="flex items-center px-2 cursor-pointer hover:underline"
-              onClick={handleClick}
-            >
-              <ArrowLeftStartOnRectangleIcon className="w-5 h-5 mr-2" />
-              <span className="text-lg">Dashboard</span>
-            </div>
-            <div 
-              className="flex items-center px-2 cursor-pointer hover:underline"
-              onClick={handleClick}
-            >
-              <CircleStackIcon className="w-5 h-5 mr-2" />
-              <span className="text-lg">Criminal DB</span>
-            </div>
-            <div 
-              className="flex items-center px-2 cursor-pointer hover:underline"
-              onClick={handleClick}
-            >
-              <ClipboardDocumentListIcon className="w-5 h-5 mr-2" />
-              <span className="text-lg">Reports</span>
-            </div>
-            <div 
-              className="flex items-center px-2 cursor-pointer hover:underline"
-              onClick={handleClick}
-            >
-              <FingerPrintIcon className="w-5 h-5 mr-2" />
-              <span className="text-lg">Processing</span>
-            </div>
-          </div>
+          <Sidebar headerText={headerText} sideBarClick={sideBarClick} />
 
           <div className="flex border-2 flex-col h-24 py-2 gap-3">
             <div 
@@ -67,7 +45,7 @@ function Dashboard() {
           </div>
         </div>
         <div className="flex h-20 px-6">
-          <h1 className='text-2xl font-bold self-center'>Dashboard Overview</h1>
+          <h1 className='text-2xl font-bold self-center'>{headerText}</h1>
         </div>
 
       </div>
