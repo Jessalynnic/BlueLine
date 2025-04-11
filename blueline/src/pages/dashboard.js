@@ -4,11 +4,18 @@ import logo from '../images/blueline_text_logo.png';
 import Sidebar from './components/sideBar';
 import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import badgeIcon from '../images/badge.png';
+import CurrentDateDisplay from './components/dateDisplay';
 import CriminalDB from './criminalDB';
 
 function Dashboard() {
     const navigate = useNavigate();
     const [headerText, setHeaderText] = useState("Dashboard Overview");
+
+    const criminals = [
+      { id: 1, name: "John Doe", status: "In Custody", age: 35 },
+      { id: 2, name: "Jane Smith", status: "Wanted", age: 29 },
+      { id: 3, name: "Carlos Rivera", status: "Released", age: 42 },
+    ];
 
     const handleClick = () => {
         navigate('/');  // Navigate to the login page
@@ -29,7 +36,7 @@ function Dashboard() {
           
           <Sidebar headerText={headerText} sideBarClick={sideBarClick} />
 
-          <div className="flex border-2 flex-col h-24 py-2 gap-3">
+          <div className="flex flex-col h-24 py-2 gap-3">
             <div 
               className="flex items-center text-sm cursor-pointer hover:underline px-2"
               onClick={handleClick}
@@ -49,6 +56,7 @@ function Dashboard() {
         {/* Right Column: Information Section */}
         <div className="flex-1 flex flex-col border-2 h-screen px-6 pt-7">
           <h1 className='text-2xl mb-4 font-bold'>{headerText}</h1>
+          <CurrentDateDisplay />
 
           <div className="flex-1 flex flex-col h-2/3 border-2">
             {headerText === "Criminal Database" && <CriminalDB />}
