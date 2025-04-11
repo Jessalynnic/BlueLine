@@ -4,6 +4,7 @@ import logo from '../images/blueline_text_logo.png';
 import Sidebar from './components/sideBar';
 import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import badgeIcon from '../images/badge.png';
+import CurrentDateDisplay from './components/dateDisplay';
 import CriminalDB from './criminalDB';
 
 function Dashboard() {
@@ -49,6 +50,7 @@ function Dashboard() {
         {/* Right Column: Information Section */}
         <div className="flex-1 flex flex-col border-2 h-screen px-6 pt-7">
           <h1 className='text-2xl mb-4 font-bold'>{headerText}</h1>
+          <CurrentDateDisplay />
 
           <div className="flex-1 flex flex-col h-2/3 border-2">
             {headerText === "Criminal Database" && <CriminalDB />}
