@@ -11,6 +11,12 @@ function Dashboard() {
     const navigate = useNavigate();
     const [headerText, setHeaderText] = useState("Dashboard Overview");
 
+    const criminals = [
+      { id: 1, name: "John Doe", status: "In Custody", age: 35 },
+      { id: 2, name: "Jane Smith", status: "Wanted", age: 29 },
+      { id: 3, name: "Carlos Rivera", status: "Released", age: 42 },
+    ];
+
     const handleClick = () => {
         navigate('/');  // Navigate to the login page
     };
@@ -30,7 +36,7 @@ function Dashboard() {
           
           <Sidebar headerText={headerText} sideBarClick={sideBarClick} />
 
-          <div className="flex border-2 flex-col h-24 py-2 gap-3">
+          <div className="flex flex-col h-24 py-2 gap-3">
             <div 
               className="flex items-center text-sm cursor-pointer hover:underline px-2"
               onClick={handleClick}

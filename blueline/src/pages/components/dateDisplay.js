@@ -17,7 +17,7 @@ function CurrentDateDisplay() {
     });
 
     return (
-        <div className="flex text-sm text-gray-700 px-4 justify-end">
+        <div className="flex text-sm text-gray-700 justify-end">
           {formatted}
         </div>
     );

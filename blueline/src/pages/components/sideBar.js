@@ -8,7 +8,7 @@ import {
 
 const Sidebar = ({ headerText, sideBarClick }) => {
     return (
-        <div className="flex flex-col border-2 gap-3">
+        <div className="flex flex-col gap-3">
             <div 
               className={`flex items-center px-2 cursor-pointer hover:underline ${headerText === "Dashboard Overview" ? "text-blue-600" : ""}`}
               onClick={() => sideBarClick("Dashboard Overview")}
