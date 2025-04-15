@@ -11,12 +11,6 @@ function Dashboard() {
     const navigate = useNavigate();
     const [headerText, setHeaderText] = useState("Dashboard Overview");
 
-    const criminals = [
-      { id: 1, name: "John Doe", status: "In Custody", age: 35 },
-      { id: 2, name: "Jane Smith", status: "Wanted", age: 29 },
-      { id: 3, name: "Carlos Rivera", status: "Released", age: 42 },
-    ];
-
     const handleClick = () => {
         navigate('/');  // Navigate to the login page
     };
@@ -58,7 +52,7 @@ function Dashboard() {
           <h1 className='text-2xl mb-4 font-bold'>{headerText}</h1>
           <CurrentDateDisplay />
 
-          <div className="flex-1 flex flex-col h-2/3 border-2">
+          <div className="flex-1 flex flex-col h-2/3">
             {headerText === "Criminal Database" && <CriminalDB />}
           </div>
         </div>
