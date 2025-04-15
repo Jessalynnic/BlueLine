@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "./components/searchBar";
 import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import CriminalTable from "./components/tableLayout";
@@ -22,6 +22,8 @@ const criminals = [
 ];
   
 const CriminalDB = () => {
+    const [viewMode, setViewMode] = useState("table");
+
     return (
         <div className="flex flex-col">
             <div className="flex flex-col h-30 items-center justify-center gap-2">
@@ -29,26 +31,25 @@ const CriminalDB = () => {
                 <span className="text-sm">Advanced Filters</span>
             </div>
             <div className="w-full h-10 flex items-center justify-end">
-                <button
-                    type="submit"
-                    className="w-8 flex items-center justify-center rounded-md hover:bg-gray-100"
+                <div
+                    onClick={() => setViewMode("table")}
+                    className={`w-8 h-8 flex items-center justify-center rounded-md cursor-pointer hover:bg-gray-100 
+                        ${viewMode === "table" ? "border-2 border-gray-400" : ""}`}
                 >
                     <ListBulletIcon className="w-5 h-5" />
-                </button>
-                <button
-                    type="submit"
-                    className="w-8 flex items-center justify-center rounded-md hover:bg-gray-100"
+                </div>
+                
+                <div
+                    onClick={() => setViewMode("grid")}
+                    className={`w-8 h-8 flex items-center justify-center rounded-md cursor-pointer hover:bg-gray-100 
+                        ${viewMode === "grid" ? "border-2 border-gray-400" : ""}`}
                 >
                     <Squares2X2Icon className="w-5 h-5" />
-                </button>
+                </div>
             </div>
             <div>
                 <CriminalTable data={criminals} />
             </div>
-            <div className="border-2 w-full">
-
-            </div>
-                
         </div>
     );
 };

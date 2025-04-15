@@ -53,7 +53,7 @@ function CriminalTable({ data }) {
                         }}
                         className="ml-2 px-2 py-1 border rounded"
                     >
-                        {[5, 10, 15, 20].map((n) => (
+                        {[10, 15, 20].map((n) => (
                         <option key={n} value={n}>{n}</option>
                         ))}
                     </select>
