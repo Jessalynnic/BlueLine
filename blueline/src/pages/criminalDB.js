@@ -45,6 +45,9 @@ const CriminalDB = () => {
             <div>
                 <CriminalTable data={criminals} />
             </div>
+            <div className="border-2 w-full">
+
+            </div>
                 
         </div>
     );
