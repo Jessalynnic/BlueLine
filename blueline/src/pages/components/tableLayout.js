@@ -14,13 +14,13 @@ function CriminalTable({ data }) {
    
     return (
         <div>
-            <div className="overflow-y-auto max-h-[320px] border rounded">
+            <div className="overflow-y-auto max-h-[320px] min-h-[400px] border rounded">
                 <table className="min-w-full bg-white">
                     <thead className="bg-gray-100 text-gray-700 text-sm">
                     <tr>
                         <th className="py-2 px-4 border-b text-left">Name</th>
                         <th className="py-2 px-4 border-b text-left">Age</th>
-                        <th className="py-2 px-4 border-b text-left">Date Entered</th>
+                        <th className="py-2 px-4 border-b text-left">Date Processed</th>
                         <th className="py-2 px-4 border-b text-left">Last Updated</th>
                         <th className="py-2 px-4 border-b text-left">Actions</th>
                     </tr>
@@ -28,13 +28,13 @@ function CriminalTable({ data }) {
                     <tbody>
                     {currentRecords.map((criminal) => (
                         <tr key={criminal.id} className="hover:bg-gray-50">
-                        <td className="py-2 px-4 border-b">{criminal.name}</td>
-                        <td className="py-2 px-4 border-b">{criminal.age}</td>
+                        <td className="py-2 px-4 border-b">{criminal.name || "N/A"}</td>
+                        <td className="py-2 px-4 border-b">{criminal.age || "N/A"}</td>
                         <td className="py-2 px-4 border-b">{criminal.dateEntered || "N/A"}</td>
                         <td className="py-2 px-4 border-b">{criminal.lastUpdated || "N/A"}</td>
                         <td className="py-2 px-4 border-b">
                             <button className="text-blue-600 hover:underline text-sm">
-                            View
+                            View Record
                             </button>
                         </td>
                         </tr>
