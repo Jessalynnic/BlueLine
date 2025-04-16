@@ -23,10 +23,10 @@ function CriminalGrid({ data }) {
                     {currentRecords.map((criminal) => (
                     <div key={criminal.id} className="bg-white rounded-xl shadow p-4 border border-gray-200">
                         <img src={mugshots[criminal.id - 1]} alt={criminal.name} className="w-32 h-auto mb-2"/>
-                        <h2 className="text-lg font-semibold text-gray-800 mb-1">{criminal.name}</h2>
-                        <p className="text-sm text-gray-600">Age: {criminal.age}</p>
-                        <p className="text-sm text-gray-600">Date Entered: {criminal.dateEntered}</p>
-                        <p className="text-sm text-gray-600">Last Updated: {criminal.lastUpdated}</p>
+                        <h2 className="text-lg font-semibold text-gray-800 mb-1">{criminal.name || "N/A"}</h2>
+                        <p className="text-sm text-gray-600">Age: {criminal.age || "N/A"}</p>
+                        <p className="text-sm text-gray-600">Date Processed: {criminal.dateEntered || "N/A"}</p>
+                        <p className="text-sm text-gray-600">Last Updated: {criminal.lastUpdated || "N/A"}</p>
                         <button className="mt-3 inline-block text-blue-600 hover:underline text-sm">
                         View Record
                         </button>
