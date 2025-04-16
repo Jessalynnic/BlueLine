@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import SearchBar from "./components/searchBar";
-import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
+import { ChevronUpIcon, ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import CriminalTable from "./components/tableLayout";
+import CriminalGrid from "./components/gridLayout";
 
 const criminals = [
     { id: 1, name: "Doe, John", age: 35, dateEntered: "03/15/2024", lastUpdated: "04/01/2025" },
@@ -28,9 +29,17 @@ const CriminalDB = () => {
         <div className="flex flex-col">
             <div className="flex flex-col h-30 items-center justify-center gap-2">
                 <SearchBar/>
-                <span className="text-sm">Advanced Filters</span>
+                <div className="flex flex-row gap-2">
+                    <span className="text-sm">Advanced Filters</span>
+                    <ChevronUpIcon className="w-5 h-5" />
+                </div>
+                
             </div>
-            <div className="w-full h-10 flex items-center justify-end">
+            <div className="w-full h-10 mt-4 flex items-center justify-end relative">
+                <div className="absolute left-1/2 -translate-x-1/2 flex flex-row self-center gap-1">
+                    <span className="text-sm">{criminals.length}</span>
+                    <span className="text-sm">records found</span>
+                </div>
                 <div
                     onClick={() => setViewMode("table")}
                     className={`w-8 h-8 flex items-center justify-center rounded-md cursor-pointer hover:bg-gray-100 
@@ -48,7 +57,8 @@ const CriminalDB = () => {
                 </div>
             </div>
             <div>
-                <CriminalTable data={criminals} />
+                {viewMode === "table" && <CriminalTable data={criminals} />}
+                {viewMode === "grid" && <CriminalGrid data={criminals} />}
             </div>
         </div>
     );

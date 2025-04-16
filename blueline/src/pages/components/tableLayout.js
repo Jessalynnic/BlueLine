@@ -14,7 +14,7 @@ function CriminalTable({ data }) {
    
     return (
         <div>
-            <div className="overflow-y-auto max-h-[320px] border rounded">
+            <div className="overflow-y-auto max-h-[320px] min-h-[400px] border rounded">
                 <table className="min-w-full bg-white">
                     <thead className="bg-gray-100 text-gray-700 text-sm">
                     <tr>
