@@ -9,8 +9,6 @@ function CriminalTable({ data }) {
     const indexOfFirst = indexOfLast - recordsPerPage;
     const currentRecords = data.slice(indexOfFirst, indexOfLast);
     const totalPages = Math.ceil(data.length / recordsPerPage);
-    
-    console.log("Current Records:", currentRecords);
    
     return (
         <div>

@@ -21,9 +21,15 @@ const criminals = [
     { id: 14, name: "Wilson, Mia", age: 34, dateEntered: "06/17/2024", lastUpdated: "03/09/2025" },
     { id: 15, name: "Scott, William", age: 32, dateEntered: "01/25/2024", lastUpdated: "02/18/2025" }
 ];
+
+
   
 const CriminalDB = () => {
     const [viewMode, setViewMode] = useState("table");
+    
+    const sortedRecords = [...criminals].sort((a, b) => 
+        a.name.localeCompare(b.name)
+    );
 
     return (
         <div className="flex flex-col">
@@ -57,8 +63,8 @@ const CriminalDB = () => {
                 </div>
             </div>
             <div>
-                {viewMode === "table" && <CriminalTable data={criminals} />}
-                {viewMode === "grid" && <CriminalGrid data={criminals} />}
+                {viewMode === "table" && <CriminalTable data={sortedRecords} />}
+                {viewMode === "grid" && <CriminalGrid data={sortedRecords} />}
             </div>
         </div>
     );
