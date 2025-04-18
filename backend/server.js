@@ -1,18 +1,29 @@
-require('dotenv').config();  
+import 'dotenv/config';  
 
-const express = require('express');
-const pool = require('./database/db');
+import express from 'express';
+import cors from 'cors';
+import pool from './database/db.js';
+
+import criminalRouter from './routers/criminalRouter.js';
 
 //Connect to PostgreSQL
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.get('/', (req, res) => {
-    res.send('Backend is running');
-});
+app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(express.json());
 
+//Checking database connection
+pool
+  .connect()
+  .then(() => console.log('Connected to Postgres'))
+  .catch(err => console.error('Postgres connection error:', err));
+
+// Routes
+app.use('/api/criminals', criminalRouter);
+
+
+//Starting server
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-console.log("DB User:", process.env.DB_USER);
