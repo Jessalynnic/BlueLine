@@ -21,12 +21,19 @@ function CriminalGrid({ data }) {
             <div className="max-h-[60vh] overflow-y-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
                     {currentRecords.map((criminal) => (
-                    <div key={criminal.id} className="bg-white rounded-xl shadow p-4 border border-gray-200">
-                        <img src={mugshots[criminal.id - 1]} alt={criminal.name} className="w-32 h-auto mb-2"/>
-                        <h2 className="text-lg font-semibold text-gray-800 mb-1">{criminal.name || "N/A"}</h2>
+                    <div key={criminal.criminal_id} className="bg-white rounded-xl shadow p-4 border border-gray-200">
+                        <img src={mugshots[criminal.criminal_id - 1]} alt={criminal.first_name} className="w-32 h-auto mb-2"/>
+                        <h2 className="text-lg font-semibold text-gray-800 mb-1">
+                            {criminal.first_name && criminal.last_name ? `${criminal.last_name},
+                             ${criminal.first_name}`: 'N/A'}
+                        </h2>
                         <p className="text-sm text-gray-600">Age: {criminal.age || "N/A"}</p>
-                        <p className="text-sm text-gray-600">Date Processed: {criminal.dateEntered || "N/A"}</p>
-                        <p className="text-sm text-gray-600">Last Updated: {criminal.lastUpdated || "N/A"}</p>
+                        <p className="text-sm text-gray-600">
+                            Date Processed: {criminal.date_processed ? new Date(criminal.date_processed).toLocaleDateString() : 'N/A'}
+                        </p>
+                        <p className="text-sm text-gray-600">
+                            Last Updated: {criminal.last_updated ? new Date(criminal.last_updated).toLocaleDateString() : 'N/A'}
+                        </p>
                         <button className="mt-3 inline-block text-blue-600 hover:underline text-sm">
                         View Record
                         </button>

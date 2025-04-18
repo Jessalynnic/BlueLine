@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 
 function CriminalTable({ data }) {
+    console.log('Data from criminalDB:', data);
+
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage, setRecordsPerPage] = useState(10);
 
@@ -25,11 +27,18 @@ function CriminalTable({ data }) {
                     </thead>
                     <tbody>
                     {currentRecords.map((criminal) => (
-                        <tr key={criminal.id} className="hover:bg-gray-50">
-                        <td className="py-2 px-4 border-b">{criminal.name || "N/A"}</td>
+                        <tr key={criminal.criminal_id} className="hover:bg-gray-50">
+                        <td className="py-2 px-4 border-b">
+                            {criminal.first_name && criminal.last_name ? `${criminal.last_name},
+                             ${criminal.first_name}`: 'N/A'}
+                        </td>
                         <td className="py-2 px-4 border-b">{criminal.age || "N/A"}</td>
-                        <td className="py-2 px-4 border-b">{criminal.dateEntered || "N/A"}</td>
-                        <td className="py-2 px-4 border-b">{criminal.lastUpdated || "N/A"}</td>
+                        <td className="py-2 px-4 border-b">
+                            {criminal.date_processed ? new Date(criminal.date_processed).toLocaleDateString() : 'N/A'}
+                        </td>
+                        <td className="py-2 px-4 border-b">
+                            {criminal.last_updated ? new Date(criminal.last_updated).toLocaleDateString() : 'N/A'}
+                        </td>
                         <td className="py-2 px-4 border-b">
                             <button className="text-blue-600 hover:underline text-sm">
                             View Record
