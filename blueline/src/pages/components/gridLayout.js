@@ -6,7 +6,7 @@ import emilyJohnson from '../../images/mugshots/emily_johnson.png';
 import marcusLee from '../../images/mugshots/marcus_lee.png';
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 
-function CriminalGrid({ data }) {
+function CriminalGrid({ data, onViewRecord }) {
     const mugshots = [johnDoe, janeSmith, carlosRivera, emilyJohnson, marcusLee];
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage, setRecordsPerPage] = useState(8);
@@ -34,8 +34,11 @@ function CriminalGrid({ data }) {
                         <p className="text-sm text-gray-600">
                             Last Updated: {criminal.last_updated ? new Date(criminal.last_updated).toLocaleDateString() : 'N/A'}
                         </p>
-                        <button className="mt-3 inline-block text-blue-600 hover:underline text-sm">
-                        View Record
+                        <button 
+                            className="mt-3 inline-block text-blue-600 hover:underline text-sm"
+                            onClick={() => onViewRecord(criminal)}
+                        >
+                            View Record
                         </button>
                     </div>
                     ))}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 
-function CriminalTable({ data }) {
+function CriminalTable({ data, onViewRecord }) {
     console.log('Data from criminalDB:', data);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -40,8 +40,11 @@ function CriminalTable({ data }) {
                             {criminal.last_updated ? new Date(criminal.last_updated).toLocaleDateString() : 'N/A'}
                         </td>
                         <td className="py-2 px-4 border-b">
-                            <button className="text-blue-600 hover:underline text-sm">
-                            View Record
+                            <button 
+                                className="text-blue-600 hover:underline text-sm"
+                                onClick={() => onViewRecord(criminal)}
+                            >
+                                View Record
                             </button>
                         </td>
                         </tr>

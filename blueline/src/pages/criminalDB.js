@@ -2,38 +2,24 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "./components/searchBar";
 import { ChevronUpIcon, ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import { fetchAllCriminals } from "../api/criminalApi";
+import CriminalRecord from "./criminalRecords";
 import CriminalTable from "./components/tableLayout";
 import CriminalGrid from "./components/gridLayout";
 
-// const criminals = [
-//     { id: 1, name: "Doe, John", age: 35, dateEntered: "03/15/2024", lastUpdated: "04/01/2025" },
-//     { id: 2, name: "Smith, Jane", age: 29, dateEntered: "06/20/2024", lastUpdated: "03/12/2025" },
-//     { id: 3, name: "Rivera, Carlos", age: 42, dateEntered: "01/10/2024", lastUpdated: "03/29/2025" },
-//     { id: 4, name: "Johnson, Emily", age: 31, dateEntered: "08/25/2024", lastUpdated: "04/05/2025" },
-//     { id: 5, name: "Lee, Marcus", age: 27, dateEntered: "11/30/2024", lastUpdated: "02/21/2025" },
-//     { id: 6, name: "Patel, Sophia", age: 38, dateEntered: "02/19/2024", lastUpdated: "01/30/2025" },
-//     { id: 7, name: "Chen, James", age: 44, dateEntered: "04/01/2024", lastUpdated: "03/05/2025" },
-//     { id: 8, name: "Martinez, Olivia", age: 33, dateEntered: "07/14/2024", lastUpdated: "03/18/2025" },
-//     { id: 9, name: "O'Connor, Liam", age: 30, dateEntered: "09/09/2024", lastUpdated: "02/28/2025" },
-//     { id: 10, name: "Nguyen, Ava", age: 36, dateEntered: "12/03/2024", lastUpdated: "04/08/2025" },
-//     { id: 11, name: "Brown, Noah", age: 41, dateEntered: "05/11/2024", lastUpdated: "03/25/2025" },
-//     { id: 12, name: "Davis, Isabella", age: 26, dateEntered: "03/03/2024", lastUpdated: "01/14/2025" },
-//     { id: 13, name: "Thomas, Elijah", age: 39, dateEntered: "10/20/2024", lastUpdated: "04/04/2025" },
-//     { id: 14, name: "Wilson, Mia", age: 34, dateEntered: "06/17/2024", lastUpdated: "03/09/2025" },
-//     { id: 15, name: "Scott, William", age: 32, dateEntered: "01/25/2024", lastUpdated: "02/18/2025" }
-// ];
 const getCriminals = async () => {
-    const response = await fetch('http://localhost:5050/api/criminals/fetchAll');
-    if (!response.ok) {
-      throw new Error(`Failed to fetch criminals (status: ${response.status})`);
+    try {
+      const criminals = await fetchAllCriminals();
+      return criminals;
+    } catch (err) {
+      throw new Error(`Failed to load criminals: ${err.message}`);
     }
-    return response.json();
 };
 
   
 const CriminalDB = () => {
     const [viewMode, setViewMode] = useState("table");
     const [criminals, setCriminals] = useState([]);
+    const [selectedCriminal, setSelectedCriminal] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -50,15 +36,24 @@ const CriminalDB = () => {
                 setLoading(false);
             }
         };
-
         fetchData();
     }, []);
 
     if (loading) return <div>Loading criminals…</div>;
     if (error) return <div>Error fetching criminals: {error.message}</div>;
 
+    if (selectedCriminal) {
+        return (
+          <CriminalRecord 
+            criminal={selectedCriminal} 
+            onBack={() => setSelectedCriminal(null)} 
+          />
+        );
+    }
+
     return (
-        <div className="flex flex-col">
+        //<div className="flex flex-col">
+        <>
             <div className="flex flex-col h-30 items-center justify-center gap-2">
                 <SearchBar/>
                 <div className="flex flex-row gap-2">
@@ -89,10 +84,21 @@ const CriminalDB = () => {
                 </div>
             </div>
             <div>
-                {viewMode === "table" && <CriminalTable data={criminals} />}
-                {viewMode === "grid" && <CriminalGrid data={criminals} />}
+                {viewMode === 'table' && (
+                    <CriminalTable 
+                        data={criminals} 
+                        onViewRecord={setSelectedCriminal} 
+                    />
+                )}
+                {viewMode === 'grid' && (
+                    <CriminalGrid  
+                        data={criminals} 
+                        onViewRecord={setSelectedCriminal} 
+                    />
+                )}
             </div>
-        </div>
+        </>
+        //</div>
     );
 };
 
