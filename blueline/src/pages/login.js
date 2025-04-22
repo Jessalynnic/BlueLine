@@ -38,14 +38,14 @@ function Login() {
         </h1>
 
         <form onSubmit={handleLogin}>
-          {/* Username Input */}
+          {/* Employee ID Input */}
           <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+            <label htmlFor="emp_id" className="block text-sm font-medium text-gray-700">Employee ID</label>
             <input
               type="text"
-              id="username"
-              name="username"
-              placeholder="Enter your username"
+              id="emp_id"
+              name="emp_id"
+              placeholder="Enter your employee id"
               className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
             />
           </div>

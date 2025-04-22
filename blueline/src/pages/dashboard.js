@@ -5,7 +5,7 @@ import Sidebar from './components/sideBar';
 import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import badgeIcon from '../images/badge.png';
 import CurrentDateDisplay from './components/dateDisplay';
-import CriminalDB from './criminalDB';
+import CriminalDB from './criminal/criminalDB';
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -20,10 +20,10 @@ function Dashboard() {
     }
 
     return (
-      <div className="flex flex-row">
+      <div className="flex flex-row h-screen">
         {/* Left Column: Blueline Sidebar */}
         <div 
-          className="flex flex-col h-screen px-2 py-4 justify-between"
+          className="flex flex-col h-full px-2 py-4 justify-between"
           style={{ backgroundColor: '#a0b3ca' }}
         >
           <img src={logo} alt="BlueLine Text Logo" className="w-40 h-auto" />
@@ -48,11 +48,11 @@ function Dashboard() {
           </div>
         </div>
         {/* Right Column: Information Section */}
-        <div className="flex-1 flex flex-col border-2 h-screen px-6 pt-7">
+        <div className="flex-1 flex flex-col border-2 px-6 pt-7 overflow-hidden">
           <h1 className='text-2xl mb-4 font-bold'>{headerText}</h1>
           <CurrentDateDisplay />
 
-          <div className="flex-1 flex flex-col h-2/3">
+          <div className="flex-1 flex flex-col min-h-0 overflow-y-auto">
             {headerText === "Criminal Database" && <CriminalDB />}
           </div>
         </div>
