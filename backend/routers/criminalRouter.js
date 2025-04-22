@@ -95,4 +95,25 @@ router.get('/:id/licenses', async (req, res) => {
     }
 });
 
+//Fetch languages for one criminal
+router.get('/:id/languages', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const { rows } = await pool.query(
+            `SELECT
+                l.name AS language_name,
+                cl.fluency_level
+            FROM criminal_languages cl
+            JOIN languages l
+            ON cl.language_code = l.language_code
+            WHERE cl.criminal_id = $1;`,
+            [id]
+        );
+        res.json(rows);
+    } catch (err) {
+        console.error(`Error fetching languages for id: ${id}`, err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 export default router;

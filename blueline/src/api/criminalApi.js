@@ -1,7 +1,7 @@
 const baseURL = "http://localhost:5050/api/criminals/";
 
 export const fetchAllCriminals = async () => {
-    console.log("Executing fetchAllCriminals from API");
+    //console.log("Executing fetchAllCriminals from API");
     const res = await fetch(`${baseURL}fetchAll`);
     if (!res.ok) {
         throw new Error(`Error ${res.status}`);
@@ -20,10 +20,19 @@ export const fetchCriminalSSN = async (id) => {
 };
 
 export const fetchCriminalLicenses = async (id) => {
-    console.log(`Executing fetchCriminalLicenses for ID ${id}`);
+    //console.log(`Executing fetchCriminalLicenses for ID ${id}`);
     const res = await fetch(`${baseURL}${id}/licenses`);
     if (!res.ok) {
         throw new Error(`Error fetching licenses (status ${res.status})`);
+    }
+    return await res.json();
+};
+
+export const fetchCriminalLanguages = async (id) => {
+    console.log(`Executing fetchCriminalLanguages for ID ${id}`);
+    const res = await fetch(`${baseURL}${id}/languages`);
+    if (!res.ok) {
+        throw new Error(`Error fetching languages (status ${res.status})`);
     }
     return await res.json();
 };
