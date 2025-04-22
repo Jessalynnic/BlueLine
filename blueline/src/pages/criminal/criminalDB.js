@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import SearchBar from "./components/searchBar";
+import SearchBar from "../components/searchBar";
 import { ChevronUpIcon, ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
-import { fetchAllCriminals } from "../api/criminalApi";
+import { fetchAllCriminals } from "../../api/criminalApi";
 import CriminalRecord from "./criminalRecords";
-import CriminalTable from "./components/tableLayout";
-import CriminalGrid from "./components/gridLayout";
+import CriminalTable from "../components/tableLayout";
+import CriminalGrid from "../components/gridLayout";
 
 const getCriminals = async () => {
     try {

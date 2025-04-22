@@ -1,6 +1,6 @@
 import React, { useState} from "react";
 import { ChevronLeftIcon } from '@heroicons/react/24/outline';
-import CriminalInformation from "./components/criminalPI";
+import CriminalInformation from "./criminalPI";
 
 const CriminalRecord = ({ criminal, onBack }) => {
     const [activeSection, setActiveSection] = useState("Personal Information");

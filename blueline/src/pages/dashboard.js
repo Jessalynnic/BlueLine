@@ -5,7 +5,7 @@ import Sidebar from './components/sideBar';
 import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import badgeIcon from '../images/badge.png';
 import CurrentDateDisplay from './components/dateDisplay';
-import CriminalDB from './criminalDB';
+import CriminalDB from './criminal/criminalDB';
 
 function Dashboard() {
     const navigate = useNavigate();
