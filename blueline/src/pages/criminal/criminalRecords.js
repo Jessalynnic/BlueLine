@@ -10,7 +10,7 @@ const CriminalRecord = ({ criminal, onBack }) => {
     }
 
     return (
-        <div className="flex flex-col h-screen">
+        <div className="flex flex-col h-screen overflow-hidden">
             {/* Header Section */}
             <div className="flex h-10 items-center">
                 <button onClick={onBack} className="">
@@ -33,7 +33,7 @@ const CriminalRecord = ({ criminal, onBack }) => {
                 </div>
             </div>
             
-            <div className="flex flex-col flex-1 mt-6 min-h-0 border-2 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto mt-6 border-2">
                 {activeSection === "Personal Information" ? <CriminalInformation criminal={criminal}/> : ""}
                 
             </div>
