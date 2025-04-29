@@ -53,7 +53,10 @@ function Dashboard() {
           <CurrentDateDisplay />
 
           <div className="flex-1 flex flex-col min-h-0 overflow-y-auto">
+            {headerText === "Dashboard Overview" && <span className="text-lg self-center">This feature has not been implemented yet.</span>}
             {headerText === "Criminal Database" && <CriminalDB />}
+            {headerText === "Reports" && <span className="text-lg self-center">This feature has not been implemented yet.</span>}
+            {headerText === "Processing" && <span className="text-lg self-center">This feature has not been implemented yet.</span>}
           </div>
         </div>
       </div>

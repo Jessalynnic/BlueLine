@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import johnDoe from '../../images/mugshots/john_doe.png';
-import { fetchCriminalSSN, fetchCriminalLicenses } from '../../api/criminalApi';
+import { fetchCriminalSSN, fetchCriminalLicenses, fetchCriminalLanguages } from '../../api/criminalApi';
 import { LockClosedIcon } from "@heroicons/react/24/outline";
 import LicenseCard from "./criminalComponents/licenseCard";
 import LeftThumb from "../../images/fingerprints/leftThumb.png";
@@ -32,11 +32,22 @@ const getCriminalLicenses = async (id) => {
     }
 };
 
+const getCriminalLanguages = async (id) => {
+    try {
+        const languages = await fetchCriminalLanguages(id);
+        return languages;
+    } catch (err) {
+      throw new Error(`Failed to load languages: ${err.message}`);
+    }
+};
+
 const CriminalInformation = ({ criminal }) => {
     const [ssn, setSsn] = useState(null);
     const [licenses, setLicenses] = useState([]);
+    const [languages, setLanguages] = useState([]);
     const [loadingSSN, setLoadingSSN] = useState(false);
     const [loadingLicenses, setLoadingLicenses] = useState(false);
+    const [loadingLanguages, setLoadingLanguages] = useState(false);
     const fingerprints = [LeftThumb, LeftPointer, LeftMiddle, LeftRing, LeftPinky,
         RightThumb, RightIndex, RightMiddle, RightRing, RightPinky
     ];
@@ -81,6 +92,25 @@ const CriminalInformation = ({ criminal }) => {
         };
         fetchLicenses();
     }, [criminal.criminal_id]);
+
+    useEffect(() => {
+        if (!criminal.criminal_id) return;
+
+        const fetchLanguages = async () => {
+            setLoadingLanguages(true);
+            try {
+                const languages = await getCriminalLanguages(criminal.criminal_id);
+                setLanguages(languages);
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setLoadingLanguages(false);
+            }
+        };
+        fetchLanguages();
+    }, [criminal.criminal_id]);
+
+    console.log("Languages fetched: ", languages);
     
     let ssnDisplay;
     if (loadingSSN) {
@@ -209,6 +239,18 @@ const CriminalInformation = ({ criminal }) => {
                             </div>
                             <div className="flex fle-row w-1/2">
                                 {ssnDisplay}
+                            </div>
+                        </div>
+                        <div className="flex flex-row w-full">
+                            <div className="flex w-1/2">
+                                <span className="font-medium">Language(s):</span>
+                            </div>
+                            <div className="flex flex-col w-1/2">
+                                {languages.map(lang => (
+                                    <p key={lang.language_code || lang.language_name}>
+                                    {lang.language_name} ({lang.fluency_level})
+                                    </p>
+                                ))}
                             </div>
                         </div>
                     </div>

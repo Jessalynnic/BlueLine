@@ -17,12 +17,24 @@ const getCriminals = async () => {
 
   
 const CriminalDB = () => {
+    const [inputValue, setInputValue] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
     const [viewMode, setViewMode] = useState("table");
     const [criminals, setCriminals] = useState([]);
     const [selectedCriminal, setSelectedCriminal] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    //Debounce the search input
+    useEffect(() => {
+        const delay = setTimeout(() => {
+          setSearchQuery(inputValue);
+        }, 300); 
+    
+        return () => clearTimeout(delay); // cleanup on new input
+    }, [inputValue]);
+
+    //Fetch criminal data from database
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -33,7 +45,7 @@ const CriminalDB = () => {
                 console.error(err);
                 setError(err);
             } finally {
-                setLoading(false);
+                setLoading(false); 
             }
         };
         fetchData();
@@ -52,21 +64,25 @@ const CriminalDB = () => {
     }
 
     return (
-        //<div className="flex flex-col">
         <>
             <div className="flex flex-col h-30 items-center justify-center gap-2">
-                <SearchBar/>
+                <SearchBar 
+                    value={inputValue} 
+                    onChange={setInputValue}
+                />
                 <div className="flex flex-row gap-2">
                     <span className="text-sm">Advanced Filters</span>
                     <ChevronUpIcon className="w-5 h-5" />
                 </div>
-                
             </div>
             <div className="w-full h-10 mt-4 flex items-center justify-end relative">
-                <div className="absolute left-1/2 -translate-x-1/2 flex flex-row self-center gap-1">
-                    <span className="text-sm">{criminals.length}</span>
-                    <span className="text-sm">records found</span>
-                </div>
+                {searchQuery.trim() !== "" && (
+                    <div className="absolute left-1/2 -translate-x-1/2 flex flex-row self-center gap-1">
+                        <span className="text-sm">{criminals.length}</span>
+                        <span className="text-sm">records found</span>
+                    </div>
+                )}
+
                 <div
                     onClick={() => setViewMode("table")}
                     className={`w-8 h-8 flex items-center justify-center rounded-md cursor-pointer hover:bg-gray-100 
@@ -84,17 +100,21 @@ const CriminalDB = () => {
                 </div>
             </div>
             <div>
-                {viewMode === 'table' && (
-                    <CriminalTable 
-                        data={criminals} 
-                        onViewRecord={setSelectedCriminal} 
-                    />
-                )}
-                {viewMode === 'grid' && (
-                    <CriminalGrid  
-                        data={criminals} 
-                        onViewRecord={setSelectedCriminal} 
-                    />
+                {searchQuery.trim() !== "" && (
+                    <>
+                        {viewMode === "table" && (
+                            <CriminalTable 
+                                data={criminals} 
+                                onViewRecord={setSelectedCriminal} 
+                            />
+                        )}
+                        {viewMode === "grid" && (
+                            <CriminalGrid  
+                                data={criminals} 
+                                onViewRecord={setSelectedCriminal} 
+                            />
+                        )}
+                    </>
                 )}
             </div>
         </>

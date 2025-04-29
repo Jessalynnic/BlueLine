@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import searchIcon from '../../images/search_icon.png';
 
-const SearchBar = () => {
-    const [query, setQuery] = useState("");
+const SearchBar = ({ value, onChange }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Search for:", query);
+        console.log("Search for:", value);
     };
 
     return (
@@ -19,8 +18,8 @@ const SearchBar = () => {
                 type="text"
                 className="w-full pl-10 focus:outline-none text-sm flex items-center"
                 placeholder="Search..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
             />
         </form>
     );
