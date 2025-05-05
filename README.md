@@ -87,7 +87,7 @@ Option 2: Using pgAdmin (GUI)
 
 ## 🔑 Environment Setup
 
-1. In the server/ folder, create a .env file:
+1. In the backend/ folder, create a .env file:
     ```bash
    DB_USER=your_user
     DB_HOST=localhost
